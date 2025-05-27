@@ -39,6 +39,7 @@ async function run() {
     await client.connect();
 
     const coffecollection = client.db('coffedb').collection('coffe');
+    const  usercollection = client.db('coffedb').collection('user');
 
     app.get('/coffe',async (req, res) => {
 
@@ -97,6 +98,14 @@ async function run() {
       const id = req.params.id;
       const query ={_id: new ObjectId(id)}
      const result = await coffecollection.deleteOne(id);
+     res.send(result);
+    })
+
+
+    app.post('/user',async (req, res) => {
+     const user = req.body;
+     console.log(user);
+     const result = await  usercollection.insertOne(user);
      res.send(result);
     })
 
