@@ -123,6 +123,50 @@ async function run() {
      res.send(result);
     })
 
+
+
+
+    //        app.patch('/user',async (req, res) => {
+
+    //      const user = req.params.id;
+    //     const filter ={email:user.email}
+         
+    //     const updatedoc={
+    //       $set:
+    //       {
+            
+    //        //name:updatedcoffe.name,
+    //        lastLoggedAt:user.lastLoggedAt
+             
+             
+    //       }
+
+          
+    //     }
+
+    //      const result =  await  usercollection.updateOne(filter,updatedoc)
+    //      res.send(result)
+    // })
+            app.patch('/user', async (req, res) => {
+  const user = req.body;  // ✅ Get full user object from body
+  const filter = { email: user.email };
+
+  const updateDoc = {
+    $set: {
+      lastLoggedAt: user.lastLoggetAt  // ✅ Fix typo too!
+    }
+  };
+
+  const result = await usercollection.updateOne(filter, updateDoc);
+  res.send(result);
+});
+
+          
+
+
+
+
+
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
